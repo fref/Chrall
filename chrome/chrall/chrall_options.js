@@ -12,6 +12,7 @@
 		<li><a href=#tabStandard>Options Standard</a></li>\
 		<li><a href=#tabChrall>Compte Chrall</a></li>\
 		<li><a href=#tabOptionsChrall>Options Chrall</a></li>\
+		<li><a href=#tabNotes>Notes/Memos</a></li>\
 		<li><a href=#tabLinks>Liens</a></li>\
 	</ul>\
 	<div class=tab_container><br><br>\
@@ -54,6 +55,59 @@
 		</div>\
 		</p>\
 	</div>\
+	<div id=tabNotes class=tab_content>\
+		<h3 class='option-section'>Trolls</h3>\
+		<div class='option-section'>\
+			<p class='informational-text'>Gestion de la diplomatie personnelle.</p>\
+			<table class='option-description' align='center'>\
+				<thead><tr>\
+					<td>Id</td>\
+					<td>Race</td>\
+					<td>Niveau</td>\
+					<td>Nom</td>\
+					<td>Diplomatie</td>\
+					<td>Information</td>\
+					<td>Partagé</td>\
+					<td>Mise à jour</td>\
+					<td>Action</td>\
+				</tr></thead>\
+				<tbody id=notes_troll></tbody>\
+			</table>\
+		</div>\
+		</p>\
+		<h3 class='option-section'>Cavernes</h3>\
+		<div class='option-section'>\
+			<p class='informational-text'>Gestion des pense-bête pour endroits particuliers.</p>\
+			<table class='option-description' align='center'>\
+				<thead><tr>\
+					<td>X</td>\
+					<td>Y</td>\
+					<td>Z</td>\
+					<td>Information</td>\
+					<td>Partagé</td>\
+					<td>Mise à jour</td>\
+					<td>Action</td>\
+				</tr></thead>\
+				<tbody id=notes_grotte></tbody>\
+			</table>\
+		</div>\
+		</p>\
+		<h3 class='option-section'>Monstres</h3>\
+		<div class='option-section'>\
+			<p class='informational-text'>Gestion des flags sur les monstres.</p>\
+			<table class='option-description' align='center'>\
+				<thead><tr>\
+					<td>Id</td>\
+					<td>Information</td>\
+					<td>Partagé</td>\
+					<td>Mise à jour</td>\
+					<td>Action</td>\
+				</tr></thead>\
+				<tbody id=notes_troll></tbody>\
+			</table>\
+		</div>\
+		</p>\
+	</div>\
 	<div id=tabLinks class=tab_content>\
 	</div>";
 
@@ -71,14 +125,10 @@
 		$("#com_status_message").text(localStorage['com.status.message']);
 
 		$(".tab_content").hide();
-		if (localStorage['tab_options']) {
-			$('ul.tabs li:has(a[href="#' + localStorage['tab_options'] + '"])').addClass("active").show();
-			$('#' + localStorage['tab_options']).show();
-			localStorage.removeItem('tab_options');
-		} else {
-			$("ul.tabs li:first").addClass("active").show();
-			$(".tab_content:first").show();
-		}
+		$("ul.tabs li:first").addClass("active").show();
+		$(".tab_content:first").show();
+
+		// Gestion de l'onglet actif
 		$("ul.tabs li").click(function() {
 			$("ul.tabs li").removeClass("active");
 			$(this).addClass("active");
@@ -88,6 +138,7 @@
 			$(activeTab).fadeIn("fast");
 			return false;
 		});
+
 		$('#save_private_chrall_server').click(function() {
 			var s = $('#input_private_chrall_server').val();
 			if (s.length > 3) {
@@ -106,7 +157,7 @@
 	}
 
 	// Private -- not linked to the chrall instance
-	 function changeMdpRestreint() {
+	function changeMdpRestreint() {
 		var nm = document.getElementById('ch_mdp_restreint').value;
 		if (nm.length != 32) {
 			alert('Votre mot de passe restreint doit faire exactement 32 caractères.');
@@ -117,7 +168,7 @@
 	}
 
 	// Private -- not linked to the chrall instance
-	function isPasswordValid () {
+	function isPasswordValid() {
 		var mdpkey = 'troll.' + chrall.playerId() + '.mdp';
 		var mdp = localStorage[mdpkey];
 		var mdpIsValid = mdp && (mdp.length == 32);
@@ -125,7 +176,7 @@
 	}
 
 	// Private -- not linked to the chrall instance
-	 function refreshActivation() {
+	function refreshActivation() {
 		if (isPasswordValid()) {
 			$('#activationButton').removeClass("invisible");
 		} else {
@@ -157,7 +208,7 @@
 
 	function toggleOption() {
 		var id = $(this).attr('id');
-		localStorage[id] = this.checked ? "yes": "no";
+		localStorage[id] = this.checked ? "yes" : "no";
 	}
 
 })(window.chrall = window.chrall || {});

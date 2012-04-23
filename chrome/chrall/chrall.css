@@ -1,3 +1,5 @@
+/* Options de Chrall */
+
 .tabs {
 	font-family: Arial, sans-serif;
 	font-size: 90%;
@@ -40,6 +42,20 @@ div.option-section {
 	color: #444;
 }
 
+table.option-description {
+	border: 1px solid #a9a9a9;
+}
+
+table.option-description td, table.option-description th {
+	padding-left: 1ex;
+	padding-right: 1ex;
+	font-family: Arial, sans-serif;
+}
+
+
+
+/* Affichage des notifications */
+
 #chrall_notify_wrapper {
 	position: fixed;
 	top: 1em;
@@ -63,6 +79,8 @@ div.option-section {
 	padding-right: 0.5ex;
 	padding-left: 0.5ex;
 }
+
+/* TODO A documenter */
 
 div.floatTopRight {
 	position: fixed;
