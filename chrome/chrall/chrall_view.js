@@ -470,9 +470,6 @@ function Chrall_analyseAndReformatView() {
 							}
 						}
 				);
-
-				//> demande de notes
-				chrall.sendToChrallServer('get_notes', {'NoteRequest':noteRequest});
 			}, 1000
 	);
 
