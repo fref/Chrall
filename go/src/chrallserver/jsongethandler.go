@@ -37,37 +37,6 @@ func (h *JsonGetHandler) servePageKillometre(w http.ResponseWriter, hr *http.Req
 	fmt.Fprint(w, ")")
 }
 
-func (h *JsonGetHandler) serveNotes(w http.ResponseWriter, hr *http.Request) {
-	w.Header().Set("Content-Type", "text/javascript;charset=utf-8")
-
-	askerId, err := h.checkUserAuthentication(w, hr, "serveNotes")
-	if nil != err {
-		return
-	}
-
-	db, _ := h.store.DB()
-	defer db.Close()
-
-	amis, err := h.store.GetPartageurs(db, askerId)
-	if err != nil {
-		log.Printf("Erreur récupération amis dans serveNotes : %s\n", err.Error())
-		return
-	}
-	notes, err := h.store.GetNotes(db, GetFormValue(hr, "cat"), GetFormValueAsId(hr, "idSujet"), askerId, amis, true)
-	if err != nil {
-		log.Println("Erreur dans GetNotes :", err)
-		return
-	}
-	for i, n := range notes {
-		log.Printf("Note %d : %+v\n", i, n)
-	}
-
-	bout, _ := json.Marshal(notes)
-	fmt.Fprint(w, "receiveNotes(")
-	w.Write(bout)
-	fmt.Fprint(w, ")")
-}
-
 func (h *JsonGetHandler) serveMessageJsonp(w http.ResponseWriter, hr *http.Request) {
 	w.Header().Set("Content-Type", "text/javascript;charset=utf-8")
 	out := GetMessage(GetFormValue(hr, "TrollId"), GetFormValue(hr, "ChrallVersion"))
