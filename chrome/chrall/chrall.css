@@ -14,7 +14,7 @@
 }
 
 .informational-text {
-	color: grey;
+	color: gray;
 	margin: 0.5ex;
 	width: 80ex;
 	text-align: justify;
@@ -84,14 +84,14 @@ table.option-description td, table.option-description th {
 
 div.floatTopRight {
 	position: fixed;
-	right: 2;
-	top: 4;
+	right: 2px;
+	top: 4px;
 	z-index: 10;
 }
 
 #grid_holder {
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	position: fixed;
 	left: 0;
 	top: 32px;
@@ -121,8 +121,8 @@ table.grid td[uncharted] {
 	background-image: url(http://games.mountyhall.com/mountyhall/View/IMG_LABY/null.gif);
 	background-repeat: no-repeat;
 	background-position: center center;
-	height: 160;
-	width: 160;
+	height: 160px;
+	width: 160px;
 }
 
 table.grid th {
@@ -163,20 +163,20 @@ table.grid td {
 }
 
 .ch_object, .ch_object:hover {
-	color: grey !important;
+	color: gray !important;
 	display: none;
 }
 
 .ch_visible_object, .ch_visible_object:hover {
-	color: grey !important;
+	color: gray !important;
 }
 
 .ch_pl_object, .ch_pl_object:hover {
-	color: grey !important;
+	color: gray !important;
 }
 
 a.ch_objects_toggler {
-	color: grey !important;
+	color: gray !important;
 }
 
 .ch_mushroom, .ch_mushroom:hover {
@@ -222,7 +222,7 @@ form.gridFiltersForm {
 	left: 15px;
 	top: 32px;
 	background-color: #EBEBEB;
-	border: 1px solid grey;
+	border: 1px solid gray;
 	margin: 4px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -392,7 +392,7 @@ a.gogo:hover {
 }
 
 .bub_object {
-	background-color: grey;
+	background-color: gray;
 }
 
 .bub_competence {
@@ -529,7 +529,7 @@ a.gogo:hover {
 	left: 40px;
 	bottom: 10px;
 	background-color: #EBEBEB;
-	border: 1px solid grey;
+	border: 1px solid gray;
 	margin: 4px;
 	padding-left: 8px;
 	padding-right: 8px;
@@ -538,7 +538,7 @@ a.gogo:hover {
 }
 
 #messageCarte {
-	border-left: 1px solid grey;
+	border-left: 1px solid gray;
 	padding-left: 8px;
 }
 
