@@ -51,7 +51,8 @@
 	}
 
 	chrall.showBubble = function (target, event, text, cssClass, ajaxRequestId, leftCol) {
-		cssClass = chrall.isOptionEnabled('bubble-use-mountyhall-styles') ? 'mh_tdtitre' : cssClass;
+		var useMountyHallStyle = chrall.isOptionEnabled('bubble-use-mountyhall-styles');
+		cssClass = useMountyHallStyle ? 'mh_tdtitre' : cssClass;
 		if (bubbleExists) chrall.hideBubble();
 		var $bubbleContent;
 		var tPosX = event.pageX - pageXOffset;
@@ -73,6 +74,11 @@
 			style += "bottom:" + (h - tPosY + 20);
 		}
 		var $bubbleDiv = $("<div/>", {id : 'bubble', class: cssClass, style: style});
+		var $bubbleContainer = $bubbleDiv;
+		if (useMountyHallStyle) {
+			$bubbleContainer = $("<div/>", {id : 'mountyhall_bubble'});
+			$bubbleDiv.append($bubbleContainer);
+		}
 
 		if (ajaxRequestId && ajaxRequestId != null) {
 			var bubbleRequestId = document.getElementById('bubbleRequestId');
@@ -83,14 +89,14 @@
 			}
 			bubbleRequestId.value = ajaxRequestId; // je ne sais pas pourquoi mais utiliser $('#bubbleRequestId').val ne marche pas bien
 			if (text) {
-				$bubbleDiv.append($('<div/>', {class:'bubbleTitle'}).html(text));
+				$bubbleContainer.append($('<div/>', {class:'bubbleTitle'}).html(text));
 			}
 			$bubbleContent = $('<div/>', {id: 'bubbleContent'}).text('en attente de gogochrall...');
-			surroundContentIfNeeded(leftCol, $bubbleContent, $bubbleDiv, cssClass);
+			surroundContentIfNeeded(leftCol, $bubbleContent, $bubbleContainer, cssClass);
 		} else {
 			$bubbleContent = $('<div/>', {id: 'bubbleContent'});
 			$bubbleContent.html(text);
-			surroundContentIfNeeded(leftCol, $bubbleContent, $bubbleDiv, cssClass);
+			surroundContentIfNeeded(leftCol, $bubbleContent, $bubbleContainer, cssClass);
 		}
 		bubbleTarget = target;
 		$bubbleDiv.mouseover(chrall.keepBubbleOpen).mouseout(chrall.letBubbleClose).prependTo('body');

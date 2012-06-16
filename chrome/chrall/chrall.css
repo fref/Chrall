@@ -380,6 +380,14 @@ a.gogo:hover {
 	font-size: 12px !important;
 }
 
+#mountyhall_bubble th {
+	color: black;
+}
+
+#mountyhall_bubble td {
+	color: black;
+}
+
 .bub_monster {
 	background-color: brown;
 	color: white;
