@@ -179,6 +179,7 @@ table.grid td {
 
 a.ch_objects_toggler {
 	color: gray !important;
+	cursor: pointer;
 }
 
 .ch_mushroom, .ch_mushroom:hover {
