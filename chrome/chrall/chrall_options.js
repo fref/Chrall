@@ -52,12 +52,14 @@
 			<div style='display:block'><input id='view-disable-grid-view' type='checkbox' class='toggle-option'><span class='option-description'>Désactiver la grille 2D</span></div>\
 			<div style='display:block'><input id='view-show-distance-in-view' type='checkbox' class='toggle-option'><span class='option-description'>Afficher la distance en PA (via DE) dans les tables</span></div>\
 			<div style='display:block'><input id='view-display-hit-points-ratio' type='checkbox' class='toggle-option'><span class='option-description'>Afficher la barre de points de vie dans les tables (uniquement pour les partages actifs).</span></div>\
+			<div style='display:block'><input id='view-sort-items-per-type' type='checkbox' class='toggle-option'><span class='option-description'>Trier les items par type dans la vue (caverne par caverne).</span></div>\
 		</div>\
 		<br/>\
 		<h3 class='option-section'>Divers</h3>\
 		<div class='option-section'>\
 			<p class='informational-text'>Options sans catégorie propre.</p>\
 			<div style='display:block'><input id='bubble-use-mountyhall-styles' type='checkbox' class='toggle-option'><span class='option-description'>Utiliser les styles MountyHall pour les info-bulles</span></div>\
+			<div style='display:block'><input id='cdm-send-to-chrall' type='checkbox' class='toggle-option-default-active'><span class='option-description'>Envoyer les résultats de CdM au serveur Chrall</span></div>\
 		</div>\
 		</p>\
 	</div>\
@@ -119,9 +121,10 @@
 
 		standardOptionContainer.html(html);
 
-		$("div#tabStandard").append($(standardOptionTables[0]));
-		$("div#tabStandard").append($(standardOptionTables[1]));
-		$("div#tabStandard").append($(standardOptionTables[2]));
+		var $tabStandard = $("div#tabStandard");
+		$tabStandard.append($(standardOptionTables[0]));
+		$tabStandard.append($(standardOptionTables[1]));
+		$tabStandard.append($(standardOptionTables[2]));
 		$("#tabLinks").append(Chrall_makeLinkOptionPage());
 
 		$("#changeMdp").click(changeMdpRestreint);
@@ -160,15 +163,16 @@
 			this.checked = checked;
 			$(this).change(toggleOption);
 		});
+		$(".toggle-option-default-active").each(function() {
+			var id = $(this).attr("id");
+			this.checked = chrall.isOptionEnabled(id, "yes");
+			$(this).change(toggleOption);
+		});
 	}
 
 	// Private -- not linked to the chrall instance
 	function changeMdpRestreint() {
 		var nm = document.getElementById('ch_mdp_restreint').value;
-		if (nm.length != 32) {
-			alert('Votre mot de passe restreint doit faire exactement 32 caractères.');
-			return;
-		}
 		var mdpkey = passwordKey();
 		localStorage[mdpkey] = nm;
 		chrall.notifyUser({text:"Mot de passe modifié"});
@@ -224,4 +228,3 @@
 	}
 
 })(window.chrall = window.chrall || {});
-	
